@@ -4,13 +4,34 @@ using System.Collections.Generic;
 
 namespace Homework_1
 {
-	public partial class BinaryTree<T> : IBinaryTree<T> where T : IComparable<T>
+	/// <summary>
+	/// Class that represents binary tree with functions: addElement, deleteElement, searchElement. Has an enumerator.
+	/// </summary>
+	/// <typeparam name="T">
+	/// Type of tree elements.
+	/// </typeparam>
+	public class BinaryTree<T> : IBinaryTree<T> where T : IComparable<T>
 	{
 		private class TreeElement
 		{
+			/// <summary>
+			/// Value of tree element.
+			/// </summary>
 			public T Value { get; set; }
+			
+			/// <summary>
+			/// Left child of the current element.
+			/// </summary>
 			public TreeElement LeftChild { get; set; }
+			
+			/// <summary>
+			/// Right child of the current element.
+			/// </summary>
 			public TreeElement RightChild { get; set; }
+			
+			/// <summary>
+			/// Parent of the current element.
+			/// </summary>
 			public TreeElement Parent { get; set; }
 
 			public TreeElement(T value)
@@ -30,42 +51,44 @@ namespace Homework_1
 			{
 				head = new TreeElement(value);
 				head.Parent = head;
+				return;
 			}
-			else
+			var newElement = new TreeElement(value);
+			var temp = head;
+			while (temp != null)
 			{
-				var newElement = new TreeElement(value);
-				var temp = head;
-				while (temp != null)
+				if (newElement.Value.CompareTo(temp.Value) > 0)
 				{
-					if (newElement.Value.CompareTo(temp.Value) > 0)
+					if (temp.RightChild == null)
 					{
-						if (temp.RightChild == null)
-						{
-							temp.RightChild = newElement;
-							temp.RightChild.Parent = temp;
-							return;
-						}
-						temp = temp.RightChild;
+						temp.RightChild = newElement;
+						temp.RightChild.Parent = temp;
+						return;
 					}
-					else if (newElement.Value.CompareTo(temp.Value) < 0)
-					{
-						if (temp.LeftChild == null)
-						{
-							temp.LeftChild = newElement;
-							temp.LeftChild.Parent = temp;
-							return;
-						}
-						temp = temp.LeftChild;
-					}
+					temp = temp.RightChild;
 				}
-				if (newElement.Value.CompareTo(head.Value) <= 0)
+				else if (newElement.Value.CompareTo(temp.Value) < 0)
 				{
-					head.LeftChild = newElement;
+					if (temp.LeftChild == null)
+					{
+						temp.LeftChild = newElement;
+						temp.LeftChild.Parent = temp;
+						return;
+					}
+					temp = temp.LeftChild;
 				}
 				else
 				{
-					head.RightChild = newElement;
+					return;
 				}
+			}
+			if (newElement.Value.CompareTo(head.Value) <= 0)
+			{
+				head.LeftChild = newElement;
+			}
+			else
+			{
+				head.RightChild = newElement;
 			}
 		}
 
@@ -186,7 +209,11 @@ namespace Homework_1
 				return false;
 			}
 		}
-
+		
+		/// <summary>
+		/// Returns enumerator for tree elements.
+		/// </summary>
+		/// <returns></returns>
 		public IEnumerator<T> GetEnumerator()
 		{
 			return new Enumerator(this);
@@ -197,9 +224,8 @@ namespace Homework_1
 			return GetEnumerator();
 		}
 
-		public class Enumerator : IEnumerator<T>
+		private class Enumerator : IEnumerator<T>
 		{
-			public BinaryTree<T> tree;
 			private List<T> treeList;
 			private int position;
 
@@ -213,7 +239,9 @@ namespace Homework_1
 			/// <summary>
 			/// Creates a list with tree elements.
 			/// </summary>
-			/// <param name="element"></param>
+			/// <param name="element">
+			/// Adding to tree list element. 
+			/// </param>
 			private void MakeTreeList(TreeElement element)
 			{
 				if (element != null)
@@ -229,7 +257,10 @@ namespace Homework_1
 					treeList.Add(element.Value);
 				}
 			}
-
+			
+			/// <summary>
+			/// Returns current element.
+			/// </summary>
 			public object Current
 			{
 				get
@@ -249,7 +280,11 @@ namespace Homework_1
 			public void Dispose()
 			{
 			}
-
+			
+			/// <summary>
+			/// Moves to the next tree element.
+			/// </summary>
+			/// <returns></returns>
 			public bool MoveNext()
 			{
 				if (position < treeList.Count - 1)
@@ -259,7 +294,10 @@ namespace Homework_1
 				}
 				return false;
 			}
-
+			
+			/// <summary>
+			/// Returns to the first tree element.
+			/// </summary>
 			public void Reset()
 			{
 				position = -1;
