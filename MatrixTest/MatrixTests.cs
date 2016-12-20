@@ -6,7 +6,7 @@ namespace Homework_3
 	public class MatrixTests
 	{
 		[TestMethod]
-		public void MatrixTest1()
+		public void FavorableRobotPlacement()
 		{
 			bool[,] matrix = new bool[4, 4] { { true, true, true, false }, { true, true, false, true }, { true, false, true, true }, { false, true, true, true } };
 			bool[] robotPosition = new bool[4] { true, true, true, true };
@@ -16,7 +16,7 @@ namespace Homework_3
 		}
 
 		[TestMethod]
-		public void MatrixTest2()
+		public void AdverseRobotPlacement()
 		{
 			bool[,] matrix = new bool[3, 3] { { true, true, false }, { true, true, true }, { false, true, true } };
 			bool[] robotPosition = new bool[3] { true, true, true };
