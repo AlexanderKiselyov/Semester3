@@ -1,5 +1,8 @@
-﻿namespace Homework_3
+namespace Homework_3
 {
+	/// <summary>
+	/// Class that solves task of destroying robots.
+	/// </summary>
 	public class Robots
 	{
 		private Graph graph;
@@ -23,7 +26,7 @@
 		{
 			for (int i = 0; i < countVerteces; i++)
 			{
-				if (vertexWithRobot[i] == true)
+				if (vertexWithRobot[i])
 				{
 					countRobots++;
 				}
@@ -83,11 +86,7 @@
 		public bool FinalDecision()
 		{
 			InitialMarkVertexes();
-			if ((countMarkedRobots != 1) && (countRobots - countMarkedRobots != 1))
-			{
-				return true;
-			}
-			return false;
+			return ((countMarkedRobots != 1) && (countRobots - countMarkedRobots != 1));
 		}
 	}
 }
