@@ -9,19 +9,25 @@ namespace Homework_1
 		/// <summary>
 		/// Adds a value to the binary tree.
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="value">
+		/// Adding element.
+		/// </param>
 		void AddElement(T value);
 
 		/// <summary>
 		/// Deletes a value from the tree.
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="value">
+		/// Deleting element.
+		/// </param>
 		void DeleteElement(T value);
 
 		/// <summary>
 		/// Searches for a value in the tree.
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="value">
+		/// Searching element.
+		///</param>
 		bool SearchElement(T value);
 	}
 }
