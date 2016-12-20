@@ -4,7 +4,16 @@
 	{
 		private int numberOfVertices;
 		private bool[,] graph;
-
+		
+		/// <summary>
+		/// Graph that represents an adjacency matrix with robots in some verteces.
+		/// </summary>
+		/// <param name="matrix">
+		/// Adjecency matrix.
+		/// </param>
+		/// <param name="countVerteces">
+		/// Number of vertices in graph.
+		/// </param>
 		public Graph(bool[,] matrix, int countVerteces)
 		{
 			graph = matrix;
